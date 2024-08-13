@@ -54,3 +54,34 @@ bool find_duplicates(char str[])
     }
     return false;
 }
+
+
+bool not_alpha(char key[])
+{
+    for (int i = 0; i < strlen(key); i++)
+    {
+        if (!isalpha(key[i]))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void encode(string plaintext, string key)
+{
+    for (int i = 0; i < strlen(plaintext); i++)
+    {
+        if (isalpha(plaintext[i]))
+        {
+            if (isupper(plaintext[i]))
+            {
+                plaintext[i] = toupper(key[plaintext[i] - 'A']);
+            }
+            else
+            {
+                plaintext[i] = tolower(key[plaintext[i] - 'a']);
+            }
+        }
+    }
+}
