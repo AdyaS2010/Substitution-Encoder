@@ -23,7 +23,27 @@ int main(int argc, string argv[])
         printf("Usage: %s key\n", argv[0]);
         return 1;
     }
-    
+    else if (find_duplicates(key) == true)
+    {
+        printf("Usage: %s key\n", argv[0]);
+        return 1;
+    }
+    else if (not_alpha(key) == true)
+    {
+        printf("Usage: %s key\n", argv[0]);
+        return 1;
+    }
+
+    string plaintext = get_string("plaintext: "); // To leave this unchanged, you must make a copy
+                                                  // before calling the encode function.
+    encode(plaintext, key);
+
+    printf("ciphertext: %s\n", plaintext); // directly changes characters in plaintext rather than
+                                           // creating a new string for ciphertext.
+    // Hence, ciphertext is printed via the plaintext string ...
+    // Memory-efficient as you don't need to allocate memory to/for the (new variable) ciphertext,
+    // but it does destroy original plaintext.
+
     return 0;
 }
 
@@ -54,7 +74,6 @@ bool find_duplicates(char str[])
     }
     return false;
 }
-
 
 bool not_alpha(char key[])
 {
