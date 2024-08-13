@@ -1,68 +1,56 @@
 #include <cs50.h>
 #include <ctype.h>
-#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-int count_letters(string text);
-int count_words(string text);
-int count_sentences(string text);
-float grade_level(int letters, int sentences, int words);
+bool find_duplicates(char str[]);
+bool not_alpha(char key[]);
+void encode(string plaintext, string key);
 
-int main(void)
+int main(int argc, string argv[])
 {
-    // Prompt user for text -> passage, paragraph, sentence(s), etc...
-    string text = get_string("Text: ");
+    string key = argv[1];
 
-    // Count number of letters, words, sentences in given text
-    int letters = count_letters(text);
-    int words = count_words(text);
-    int sentences = count_sentences(text);
-    /*
-        printf("%i\n", letters);
-        printf("%i\n", words);
-        printf("%i\n", sentences);
+    // Check valid key
+    if (argc != 2)
+    {
+        printf("Usage: %s key\n", argv[0]);
+        return 1;
+    }
+    else if (strlen(key) != 26)
+    {
+        printf("Usage: %s key\n", argv[0]);
+        return 1;
+    }
+    
+    return 0;
 }
 
-int count_letters(string text)
+bool find_duplicates(char str[])
 {
-    // Return number of letters in text
-
-    // Count letters
-    int letters = 0;
-
-    for (int i = 0, length = strlen(text); i < length; i++)
+    int checker = 0;
+    for (int i = 0; i < strlen(str); i++)
     {
-        if (isalpha(text[i]))
+        /*
+        int val = tolower(str[i]) - 'a'; // Calculate position of specific character
+        if ((checker & (1 << val)) > 0) // Check if bit at val position is already set
         {
-            letters++;
+            return true;
+        }
+        else
+        {
+            checker |= (1 << val);
+            return false;
+        }
+        */
+        for (int j = i + 1; j < strlen(str); j++)
+        {
+            if (tolower(str[i]) == tolower(str[j]))
+            {
+                return true;
+            }
         }
     }
-    return letters;
-}
-
-int count_words(string text)
-{
- 
-}
-
-int count_sentences(string text)
-{
-    int sentencecount = 0;
-
-    // Return number of words in text
-    for (int i = 0, length = strlen(text); i < length; i++)
-    {
-        // if (text[i] == 32)
-        if (text[i] == '.' || text[i] == '?' || text[i] == '!')
-        {
-            sentencecount++;
-        }
-    }
-    return sentencecount;
-}
-
-float grade_level(int letters, int sentences, int words)
-{
- 
+    return false;
 }
