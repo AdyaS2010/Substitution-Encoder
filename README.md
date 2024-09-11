@@ -38,6 +38,9 @@ plaintext: hello
 ciphertext: itssg
 ```
 
+![image](https://github.com/user-attachments/assets/582c560d-48e5-4ff4-959c-416ce254f929)
+*Key is QWERTYUIOPASDFGHJKLZXCVBNM*
+
 ## Contributing
 1. Fork the repository.
 2. Create a new branch:
